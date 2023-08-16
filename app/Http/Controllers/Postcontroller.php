@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 use function PHPUnit\Framework\returnSelf;
 
-class Postcontroller extends Controller
+class PostController extends Controller
 {
     private $post;
     private $category;
