@@ -7,7 +7,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FollowController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\Postcontroller;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -44,19 +44,19 @@ Route::group(['middleware'=>'auth'],function(){
 
  Route::group(['prefix'=>'post','as'=>'post.'],function(){
 
-    Route::get('/create',[PostController::class,'create'])->name('create');
+    Route::get('/create',[Postcontroller::class,'create'])->name('create');
 
-    Route::post('/store',[PostController::class,'store'])->name('store');
+    Route::post('/store',[Postcontroller::class,'store'])->name('store');
 
-    Route::get('/{id}/show',[PostController::class,'show'])->name('show');
+    Route::get('/{id}/show',[Postcontroller::class,'show'])->name('show');
 
-    Route::get('/show',[PostController::class,'show'])->name('like.show');
+    Route::get('/show',[Postcontroller::class,'show'])->name('like.show');
 
-    Route::get('/{id}/edit',[PostController::class,'edit'])->name('edit');
+    Route::get('/{id}/edit',[Postcontroller::class,'edit'])->name('edit');
 
-    Route::patch('/{id}/update',[PostController::class,'update'])->name('update');
+    Route::patch('/{id}/update',[Postcontroller::class,'update'])->name('update');
 
-    Route::delete('/{id}',[PostController::class,'destroy'])->name('destroy');
+    Route::delete('/{id}',[Postcontroller::class,'destroy'])->name('destroy');
 
  });
 // comment
