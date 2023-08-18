@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -22,6 +23,13 @@ class ProfileController extends Controller
         return view('users.profile.show')->with('user',$user);
     }
 
+    public function suggest($id)
+    {
+        $user = $this->user->findOrFail($id);
+
+        return view('users.profile.suggest')->with('user',$user);
+    }
+
     public function edit()
     {
         $user = $this->user->findOrFail(Auth::user()->id);
@@ -35,6 +43,7 @@ class ProfileController extends Controller
         $request->validate([
             'name' => 'required|min:1|max:50',
             'email' => 'required|email|max:50|unique:users,email,' . Auth::user()->id,
+            'password' => 'required|min:8|max:50',
             'introduction' => 'required|min:1|max:1000',
             'avatar' => 'mimes:jpg,png,jpeg,gif|max:1048'
         ]);
@@ -43,6 +52,7 @@ class ProfileController extends Controller
         $user = $this->user->findOrFail(Auth::user()->id);
         $user->name = $request->name;
         $user->email  =  $request->email;
+        $user->password  =  Hash::make($request->password);
         $user->introduction  =  $request->introduction;
 
         //avatar check forst if user is updating avatar

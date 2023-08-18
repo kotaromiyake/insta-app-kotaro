@@ -45,7 +45,7 @@
                 Suggestion For You
             </div>
             <div class="col text-end">
-                <a href="#" class="fw-bold text-dark text-decoration-none">See All</a>
+                <a href="{{ route('suggest')}}" class="fw-bold text-dark text-decoration-none">See All</a>
             </div>
           </div>
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title','Admin: Users')
+@section('title','Admin: Search Users')
 @section('content')
 
 <form action="{{ route('admin.search') }}" style="width: 300px">
@@ -65,8 +65,7 @@
 
                     </div>
                 </div>
-                {{-- modal later --}}
-                @include('admin.users.modal.status')
+
 
                 @endif
             </td>

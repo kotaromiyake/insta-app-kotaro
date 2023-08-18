@@ -52,9 +52,16 @@
                      <p class="text-danger small">{{ $message }}</p>
                     @enderror
 
+                    <label for="password" class="form-label mt-3">Password</label>
+                    <input type="password" name="password" id="password" class="form-control"  required>
+                     {{-- ERROR --}}
+                     @error('password')
+                     <p class="text-danger small">{{ $message }}</p>
+                    @enderror
+
                     <label for="introduction" class="mt-3 form-label">Introduction</label>
                     <textarea name="introduction" id="introduction"
-                    cols="30" rows="5" class="form-control" placeholder="Describe yourself" required>{{ $user->introduction }}</textarea>
+                    cols="30" rows="5" class="form-control" placeholder="Describe yourself">{{ $user->introduction }}</textarea>
 
                      {{-- ERROR --}}
                      @error('introduction')

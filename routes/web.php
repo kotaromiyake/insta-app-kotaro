@@ -36,6 +36,8 @@ Route::group(['middleware'=>'auth'],function(){
     Route::get('/',[HomeController::class,'index'])->name('index');
     // search
     Route::get('/people',[HomeController::class,'search'])->name('search');
+    // suggest
+    Route::get('/suggest',[HomeController::class,'suggest'])->name('suggest');
 
 
 
@@ -47,6 +49,8 @@ Route::group(['middleware'=>'auth'],function(){
     Route::post('/store',[PostController::class,'store'])->name('store');
 
     Route::get('/{id}/show',[PostController::class,'show'])->name('show');
+
+    Route::get('/show',[PostController::class,'show'])->name('like.show');
 
     Route::get('/{id}/edit',[PostController::class,'edit'])->name('edit');
 
@@ -105,6 +109,9 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'admin'],function()
     Route::delete('/users/{id}/deactivate',[UsersController::class,'deactivate'])->name('users.deactivate');
 
     Route::post('/users/{id}/activate',[UsersController::class,'activate'])->name('users.activate');
+
+      // search
+    Route::get('/search',[UsersController::class,'search'])->name('search');
 
 
 

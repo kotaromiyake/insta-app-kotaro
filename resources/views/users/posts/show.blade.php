@@ -84,7 +84,8 @@
             @endif
                     </div>
                     <div class="col-auto px-0">
-                        <span>{{ $post->likes->count() }}</span>
+                        <a href="#" class="text-decoration-none">
+                        <span>{{ $post->likes->count() }}</span></a>
                     </div>
                     <div class="col text-end">
                         @forelse ($post->categoryPost as $category_post)

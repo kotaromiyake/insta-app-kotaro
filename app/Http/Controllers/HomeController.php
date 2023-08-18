@@ -83,6 +83,25 @@ class HomeController extends Controller
         // z - length/how many index
     }
 
+    public function suggest()
+    {
+        $all_users = $this->user->all()->except(Auth::user()->id);
+        $suggested_users = [];
+
+        foreach($all_users as $user)
+        {
+            // check if user is not followed
+            if(!$user->isFollowed())
+            {
+               $suggested_users[] = $user;
+            }
+
+        }
+
+        return view('users.suggest')->with('suggested_users',$suggested_users);
+
+    }
+
     public function search(Request $request)
     {
         $users = $this->user->where('name','like','%' .$request->search. '%')->get();

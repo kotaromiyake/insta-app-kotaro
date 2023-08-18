@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,11 +14,13 @@ class PostController extends Controller
 {
     private $post;
     private $category;
+    private $user;
 
-    public function __construct(Post $post, Category $category)
+    public function __construct(Post $post, Category $category, User $user)
     {
         $this->post = $post;
         $this->category = $category;
+        $this->user = $user;
     }
 
     // create method for create post page
@@ -68,6 +71,15 @@ class PostController extends Controller
         $post = $this->post->findOrFail($id);
 
         return view('users.posts.show')->with('post',$post);
+    }
+
+    public function likeShow($id)
+    {
+        // get the post using $id
+        $post = $this->post->findOrFail($id);
+        $user = $this->user->findOrFail($id);
+
+        return redirect()->route('index');
     }
 
     public function edit($id)

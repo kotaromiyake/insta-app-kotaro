@@ -38,4 +38,13 @@ class UsersController extends Controller
         return redirect()->back();
 
     }
+
+    public function search(Request $request)
+    {
+        $all_users = $this->user->where('name','like','%' .$request->search. '%')->paginate(10);
+
+
+
+        return view('admin.users.search')->with('all_users',$all_users)->with('search',$request->search);
+    }
 }
