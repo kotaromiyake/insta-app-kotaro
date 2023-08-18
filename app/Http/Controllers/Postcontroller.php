@@ -8,7 +8,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-use function PHPUnit\Framework\returnSelf;
 
 class PostController extends Controller
 {
@@ -33,120 +32,120 @@ class PostController extends Controller
         ->with('all_categories',$all_categories);
     }
 
-    // public function store(Request $request)
-    // {
-    // // validate the request
-    // $request->validate([
-    //     'category' => 'required|array|between:1,3',
-    //     'description' => 'required|min:1|max:1000',
-    //     'image' => 'required|mimes:png,jpg,jpeg,gif',
-    // ]);
+    public function store(Request $request)
+    {
+    // validate the request
+    $request->validate([
+        'category' => 'required|array|between:1,3',
+        'description' => 'required|min:1|max:1000',
+        'image' => 'required|mimes:png,jpg,jpeg,gif',
+    ]);
 
-    // // save to data
-    // $this->post->user_id = Auth::user()->id;
-    // $this->post->description = $request->description;
-    // // saving image using base64
-    // $this->post->image = 'data:image/' . $request->image->extension().
-    //                         ';base64,' . base64_encode(file_get_contents($request->image));
-    // // base64_encode - this will make the image into long text
-    // // base64 - create a series of text from the image.
+    // save to data
+    $this->post->user_id = Auth::user()->id;
+    $this->post->description = $request->description;
+    // saving image using base64
+    $this->post->image = 'data:image/' . $request->image->extension().
+                            ';base64,' . base64_encode(file_get_contents($request->image));
+    // base64_encode - this will make the image into long text
+    // base64 - create a series of text from the image.
 
-    // $this->post->save();
+    $this->post->save();
 
-    // // save all categories to categoryPost
+    // save all categories to categoryPost
 
-    // foreach($request->category as $category_id)
-    // {
-    //     $category_post[] = ['category_id'=>$category_id];
-    // }
-    // $this->post->categoryPost()->createMany($category_post);
+    foreach($request->category as $category_id)
+    {
+        $category_post[] = ['category_id'=>$category_id];
+    }
+    $this->post->categoryPost()->createMany($category_post);
 
-    // // return to homepage
-    // return redirect()->route('index');
+    // return to homepage
+    return redirect()->route('index');
 
-    // }
+    }
 
-    // public function show($id)
-    // {
-    //     // get the post using $id
-    //     $post = $this->post->findOrFail($id);
+    public function show($id)
+    {
+        // get the post using $id
+        $post = $this->post->findOrFail($id);
 
-    //     return view('users.posts.show')->with('post',$post);
-    // }
+        return view('users.posts.show')->with('post',$post);
+    }
 
-    // public function likeShow($id)
-    // {
-    //     // get the post using $id
-    //     $post = $this->post->findOrFail($id);
-    //     $user = $this->user->findOrFail($id);
+    public function likeShow($id)
+    {
+        // get the post using $id
+        $post = $this->post->findOrFail($id);
+        $user = $this->user->findOrFail($id);
 
-    //     return redirect()->route('index');
-    // }
+        return redirect()->route('index');
+    }
 
-    // public function edit($id)
-    // {
-    //     $all_categories = $this->category->all();
-    //     // get the post using $id
-    //     $post = $this->post->findOrFail($id);
+    public function edit($id)
+    {
+        $all_categories = $this->category->all();
+        // get the post using $id
+        $post = $this->post->findOrFail($id);
 
-    //     // get the selected categories of the post to be edited
+        // get the selected categories of the post to be edited
 
-    //     $selected_categories = [];
-    //     foreach($post->categoryPost as $category_post)
-    //     {
-    //         $selected_categories[] = $category_post->category_id;
-    //     }
+        $selected_categories = [];
+        foreach($post->categoryPost as $category_post)
+        {
+            $selected_categories[] = $category_post->category_id;
+        }
 
-    //     return view('users.posts.edit')
-    //     ->with('post',$post)->with('selected_categories',$selected_categories)->with('all_categories',$all_categories);
-    // }
+        return view('users.posts.edit')
+        ->with('post',$post)->with('selected_categories',$selected_categories)->with('all_categories',$all_categories);
+    }
 
-    // public function update(Request $request,$id)
-    // {
-    //   // validate the request
-    // $request->validate([
-    //     'category' => 'required|array|between:1,3',
-    //     'description' => 'required|min:1|max:1000',
-    //     'image' => 'mimes:png,jpg,jpeg,gif',
-    // ]);
+    public function update(Request $request,$id)
+    {
+      // validate the request
+    $request->validate([
+        'category' => 'required|array|between:1,3',
+        'description' => 'required|min:1|max:1000',
+        'image' => 'mimes:png,jpg,jpeg,gif',
+    ]);
 
-    // // save to data
-    // $post = $this->post->findOrFail($id);
-    // $post->description = $request->description;
-    // // saving image using base64
-    // // if user is updating image
-    // if($request->image)
-    // {
-    // $post->image = 'data:image/' . $request->image->extension().
-    //                         ';base64,' . base64_encode(file_get_contents($request->image));
-    // // base64_encode - this will make the image into long text
-    // // base64 - create a series of text from the image.
-    // }
-    // $post->save();
+    // save to data
+    $post = $this->post->findOrFail($id);
+    $post->description = $request->description;
+    // saving image using base64
+    // if user is updating image
+    if($request->image)
+    {
+    $post->image = 'data:image/' . $request->image->extension().
+                            ';base64,' . base64_encode(file_get_contents($request->image));
+    // base64_encode - this will make the image into long text
+    // base64 - create a series of text from the image.
+    }
+    $post->save();
 
-    // // delete all categoryPost that belongs to the post
-    // $post->categoryPost()->delete();
+    // delete all categoryPost that belongs to the post
+    $post->categoryPost()->delete();
 
-    // // save new categoryPost
-    // foreach($request->category as $category_id)
-    // {
-    //     $category_post[] = ['category_id'=>$category_id];
-    // }
-    // $post->categoryPost()->createMany($category_post);
+    // save new categoryPost
+    foreach($request->category as $category_id)
+    {
+        $category_post[] = ['category_id'=>$category_id];
+    }
+    $post->categoryPost()->createMany($category_post);
 
-    // // return to homepage
-    // return redirect()->route('post.show',$id);
-    // }
+    // return to homepage
+    return redirect()->route('post.show',$id);
+    }
 
 
 
-    // public function destroy($id)
-    // {
-    //     $this->post->destroy($id);
+    public function destroy($id)
+    {
+        $this->post->destroy($id);
 
-    //     return redirect()->route('index');
+        return redirect()->route('index');
 
-    // }
+    }
 
 
 
