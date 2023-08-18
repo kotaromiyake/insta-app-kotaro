@@ -26,7 +26,7 @@ class PostController extends Controller
     // create method for create post page
     public function create()
     {
-        $all_categories = $this->category->all();
+        $all_categories = $this->category->get();
 
         return view('users.posts.create')
         ->with('all_categories',$all_categories);
