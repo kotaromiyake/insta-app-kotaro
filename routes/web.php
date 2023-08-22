@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\LikesController;
 use App\Http\Controllers\Admin\PostsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\CommentController;
@@ -122,6 +123,8 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'admin'],function()
 
     Route::post('/posts/{id}/unhide',[PostsController::class,'unhide'])->name('posts.unhide');
 
+    Route::get('/post/search',[PostsController::class,'search'])->name('posts.search');
+
     // category
     Route::get('/categories',[CategoriesController::class,'index'])->name('categories');
 
@@ -130,6 +133,10 @@ Route::group(['prefix'=>'admin','as'=>'admin.','middleware'=>'admin'],function()
     Route::patch('/{id}/update',[CategoriesController::class,'update'])->name('update');
 
     Route::delete('/{id}',[CategoriesController::class,'destroy'])->name('destroy');
+
+    // like
+    Route::get('/likes',[LikesController::class,'index'])->name('likes');
+
 
 
 });

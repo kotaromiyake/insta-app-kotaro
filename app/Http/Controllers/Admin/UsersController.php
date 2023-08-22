@@ -47,4 +47,6 @@ class UsersController extends Controller
 
         return view('admin.users.search')->with('all_users',$all_users)->with('search',$request->search);
     }
+
+    
 }

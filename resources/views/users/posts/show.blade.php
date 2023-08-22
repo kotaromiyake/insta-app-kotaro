@@ -84,9 +84,11 @@
             @endif
                     </div>
                     <div class="col-auto px-0">
-                        <a href="#" class="text-decoration-none">
-                        <span>{{ $post->likes->count() }}</span></a>
+                        <button class="btn btn-link text-decoration-none"
+                        data-bs-toggle="modal" data-bs-target="#like-post-{{ $post->id }}">
+                        <span>{{ $post->likes->count() }}</span></button>
                     </div>
+                    @include('users.posts.contents.modals.likes')
                     <div class="col text-end">
                         @forelse ($post->categoryPost as $category_post)
             <div class="badge bg-secondary bg-opacity-50">

@@ -1,4 +1,4 @@
-<div class="modal fade" id="like-post-{{ $post->user->id }}">
+<div class="modal fade" id="like-post-{{ $post->id }}">
     <div class="modal-dialog">
         <div class="modal-content border-warning">
             <div class="modal-header border-warning">
@@ -9,7 +9,9 @@
             </div>
             <div class="modal-body">
                 <div class="mt-3">
+
                     @foreach ($post->likes as $like)
+                  
                     <div class="row align-items-center mb-3">
                       <div class="col-auto">
                           <a href="{{ route('profile.show',$like->user->id) }}">

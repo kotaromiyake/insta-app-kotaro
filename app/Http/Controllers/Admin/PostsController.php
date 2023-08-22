@@ -38,4 +38,13 @@ class PostsController extends Controller
         return redirect()->back();
 
     }
+
+    public function search(Request $request)
+    {
+        $all_posts = $this->post->where('description','like','%' .$request->search. '%')->paginate(10);
+
+
+
+        return view('admin.likes.search')->with('all_posts',$all_posts)->with('search',$request->search);
+    }
 }

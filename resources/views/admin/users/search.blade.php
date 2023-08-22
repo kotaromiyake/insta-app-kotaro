@@ -65,7 +65,7 @@
 
                     </div>
                 </div>
-
+                @include('admin.users.modal.status')
 
                 @endif
             </td>

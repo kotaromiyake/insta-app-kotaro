@@ -49,7 +49,7 @@
                             <input type="search" name="search"
                             class="form-control form-control-sm" placeholder="Search..."> </form>
                         </ul>
-                       
+
 
                         @endif
                     @endauth
@@ -137,6 +137,9 @@
                             </a>
                             <a href="{{ route('admin.categories') }}" class="list-group-item {{ request()->is('admin/categories') ? 'active' : '' }}">
                                 <i class="fa-solid fa-tags me-1"></i>Categories
+                            </a>
+                            <a href="{{ route('admin.likes') }}" class="list-group-item {{ request()->is('admin/likes') ? 'active' : '' }}">
+                                <i class="fa-solid fa-heart me-1"></i>Likes
                             </a>
                         </div>
                     </div>

@@ -34,7 +34,7 @@ class Post extends Model
     // post - loke relationship
     public function likes()
     {
-        return $this->hasMany(Like::class);
+        return $this->hasMany(Like::class,'post_id');
     }
 
     // check if user like the post
